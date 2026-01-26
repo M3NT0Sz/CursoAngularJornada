@@ -30,6 +30,8 @@ import { BotaoControleComponent } from './shared/botao-controle/botao-controle.c
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { PromocoesComponent } from './pages/home/promocoes/promocoes.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DropdownUfComponent } from './shared/form-busca/dropdown-uf/dropdown-uf.component';
+import { DepoimentosComponent } from './pages/home/depoimentos/depoimentos.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ModalComponent,
     BotaoControleComponent,
     PromocoesComponent,
+    DropdownUfComponent,
+    DepoimentosComponent,
   ],
   imports: [
     BrowserModule,
