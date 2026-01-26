@@ -10,4 +10,11 @@ import { FormBuscaService } from 'src/app/core/services/form-busca.service';
 })
 export class FormBuscaComponent {
   constructor(public formBuscaService: FormBuscaService) {}
+
+  buscar() {
+    console.log(
+      'Formulário de busca submetido com os seguintes valores: ',
+      this.formBuscaService.formBusca.value,
+    );
+  }
 }

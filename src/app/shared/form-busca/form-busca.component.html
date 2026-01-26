@@ -1,5 +1,5 @@
 <app-card variant="secondary" class="form-busca">
-  <form [formGroup]="formBuscaService.formBusca">
+  <form [formGroup]="formBuscaService.formBusca" (ngSubmit)="buscar()">
     <h2>Passagens</h2>
     <div class="flex-container">
       <mat-button-toggle-group
@@ -19,27 +19,35 @@
         >
       </mat-button-toggle-group>
       <mat-chip (click)="formBuscaService.openDialog()">
-        <div class="inner"><mat-icon>check</mat-icon> 1 adulto</div>
+        <div class="inner">
+          <mat-icon>check</mat-icon>
+          {{ formBuscaService.getDescricaoPassageiros() }}
+        </div>
       </mat-chip>
       <mat-chip (click)="formBuscaService.openDialog()">
-        <div class="inner"><mat-icon>check</mat-icon> Econômica</div>
+        <div class="inner">
+          <mat-icon>check</mat-icon>
+          {{ formBuscaService.obterControle("tipo").value }}
+        </div>
       </mat-chip>
     </div>
     <div class="flex-container">
       <app-dropdown-uf
         label="Origem"
         iconePrefixo="flight_takeoff"
+        formControlName="origem"
       ></app-dropdown-uf>
-      <button mat-icon-button>
+      <button mat-icon-button type="button" (click)="formBuscaService.trocarOrigemDestino()">
         <mat-icon>sync_alt</mat-icon>
       </button>
       <app-dropdown-uf
         label="Destino"
         iconePrefixo="flight_land"
+        formControlName="destino"
       ></app-dropdown-uf>
       <mat-form-field class="input-container" appearance="outline">
         <mat-label>Data de ida</mat-label>
-        <input matInput [matDatepicker]="ida" />
+        <input matInput [matDatepicker]="ida" formControlName="dataIda" />
         <mat-datepicker-toggle
           matIconSuffix
           [for]="ida"
@@ -48,7 +56,7 @@
       </mat-form-field>
       <mat-form-field class="input-container" appearance="outline">
         <mat-label>Data da volta</mat-label>
-        <input matInput [matDatepicker]="volta" />
+        <input matInput [matDatepicker]="volta" formControlName="dataVolta" />
         <mat-datepicker-toggle
           matIconSuffix
           [for]="volta"
