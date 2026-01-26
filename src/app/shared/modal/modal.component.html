@@ -25,22 +25,36 @@
         <li>(Até 2 anos)</li>
         <li>
           <app-botao-controle operacao="decrementar"></app-botao-controle>
-          <span>0</span>
+          <span>1</span>
           <app-botao-controle operacao="incrementar"></app-botao-controle>
         </li>
       </ul>
     </div>
-    <div class="selecao-idade">
-      <ul>
-        <li><strong>Categoria</strong></li>
-        <div class="categoria-opcoes">
-          <li><mat-chip-option>Executiva</mat-chip-option></li>
-          <li><mat-chip-option selected>Econômica</mat-chip-option></li>
-        </div>
-      </ul>
+    <div class="selecao-categoria">
+      <p><strong>Categoria</strong></p>
+      <mat-chip-listbox aria-label="Seleção de passagens">
+        <mat-chip-option
+          value="Econômica"
+          [selected]="
+            formBuscaService.formBusca.get('tipo')?.value === 'Econômica'
+          "
+          (selectionChange)="formBuscaService.alterarTipo($event, 'Econômica')"
+        >
+          Econômica
+        </mat-chip-option>
+        <mat-chip-option
+          value="Executiva"
+          [selected]="
+            formBuscaService.formBusca.get('tipo')?.value === 'Executiva'
+          "
+          (selectionChange)="formBuscaService.alterarTipo($event, 'Executiva')"
+        >
+          Executiva
+        </mat-chip-option>
+      </mat-chip-listbox>
     </div>
   </div>
-  <div mat-dialog-actions>
-    <button mat-flat-button mat-dialog-close color="primary">Close</button>
+  <div mat-dialog-actions class="modal-actions">
+    <button mat-flat-button mat-dialog-close color="primary">BUSCAR</button>
   </div>
 </section>
