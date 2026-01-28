@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
 import { FormBuscaService } from 'src/app/core/services/form-busca.service';
@@ -9,12 +9,11 @@ import { FormBuscaService } from 'src/app/core/services/form-busca.service';
   styleUrls: ['./form-busca.component.scss'],
 })
 export class FormBuscaComponent {
+  @Output() realizarBusca = new EventEmitter();
   constructor(public formBuscaService: FormBuscaService) {}
 
   buscar() {
-    console.log(
-      'Formulário de busca submetido com os seguintes valores: ',
-      this.formBuscaService.formBusca.value,
-    );
+    const formBuscavalue = this.formBuscaService.formBusca.value;
+    this.realizarBusca.emit(formBuscavalue);
   }
 }

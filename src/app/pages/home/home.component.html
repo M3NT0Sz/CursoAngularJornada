@@ -3,8 +3,8 @@
   alt="Banner da aplicação Jornada"
 ></app-banner>
 <app-container>
+  <app-form-busca (realizarBusca)="navegarParaBusca($event)"></app-form-busca>
   <h2>Promoções</h2>
-  <app-form-busca></app-form-busca>
   <app-promocoes></app-promocoes>
   <h2>Depoimentos</h2>
   <div class="card-wrapper">

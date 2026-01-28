@@ -7,7 +7,7 @@
       <button mat-button>Sobre</button>
       <ng-container *ngIf="user$ | async as pessoaUsuaria; else login">
         <a routerLink="/perfil"
-          ><img src="assets/icones/instagram.png" alt="Ícone da pessoa usuária"
+          ><img src="assets/icones/User.png" alt="Ícone da pessoa usuária"
         /></a>
         <button mat-stroked-button (click)="logout()">SAIR</button>
       </ng-container>

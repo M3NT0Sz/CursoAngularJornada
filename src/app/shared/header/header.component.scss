@@ -16,4 +16,9 @@
   .mat-mdc-outlined-button:not(:disabled) {
     border-color: white;
   }
+
+  .links-toobar {
+    display: flex;
+    align-items: center;
+  }
 }
