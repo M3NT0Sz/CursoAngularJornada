@@ -1,6 +1,14 @@
-figure{
-    margin: 0;
-    img{
-        max-width: 100%;
-    }
+figure {
+  margin: 0;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  
+  img {
+    width: 100%;
+    display: block;
+  }
 }
