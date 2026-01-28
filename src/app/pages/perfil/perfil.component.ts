@@ -32,7 +32,7 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit() {
     this.token = this.tokenService.retornarToken();
-    this.cadastroService.buscarCadastro(this.token).subscribe({
+    this.cadastroService.buscarCadastro().subscribe({
       next: (cadastro) => {
         this.cadastro = cadastro;
         this.nome = cadastro.nome;
@@ -72,17 +72,15 @@ export class PerfilComponent implements OnInit {
       estado: this.form?.value.estado,
     };
 
-    this.cadastroService
-      .editarCadastro(dadosAtualizados, this.token)
-      .subscribe({
-        next: () => {
-          alert('Cadastro editado com sucesso!');
-          this.router.navigateByUrl('/');
-        },
-        error: (err) => {
-          console.error('Erro ao editar cadastro:', err);
-        },
-      });
+    this.cadastroService.editarCadastro(dadosAtualizados).subscribe({
+      next: () => {
+        alert('Cadastro editado com sucesso!');
+        this.router.navigateByUrl('/');
+      },
+      error: (err) => {
+        console.error('Erro ao editar cadastro:', err);
+      },
+    });
   }
 
   deslogar() {
