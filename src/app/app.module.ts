@@ -42,11 +42,17 @@ import { FormBaseComponent } from './shared/form-base/form-base.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSliderModule } from '@angular/material/slider';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { AutenticacaoInterceptor } from './core/interceptors/autenticacao.interceptor';
 import { BuscaComponent } from './pages/busca/busca.component';
 import { PassagemComponent } from './shared/passagem/passagem.component';
+import { FiltrosComplementaresComponent } from './shared/form-busca/filtros-complementares/filtros-complementares.component';
+import { CompanhiasComponent } from './shared/form-busca/filtros-complementares/companhias/companhias.component';
+import { ParadasComponent } from './shared/form-busca/filtros-complementares/paradas/paradas.component';
+import { PrecosComponent } from './shared/form-busca/filtros-complementares/precos/precos.component';
+import { LabelComponent } from './shared/form-busca/filtros-complementares/label/label.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +78,11 @@ import { PassagemComponent } from './shared/passagem/passagem.component';
     PerfilComponent,
     BuscaComponent,
     PassagemComponent,
+    FiltrosComplementaresComponent,
+    CompanhiasComponent,
+    ParadasComponent,
+    PrecosComponent,
+    LabelComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,6 +105,7 @@ import { PassagemComponent } from './shared/passagem/passagem.component';
     MatRadioModule,
     MatDividerModule,
     MatCheckboxModule,
+    MatSliderModule,
   ],
   providers: [
     {
