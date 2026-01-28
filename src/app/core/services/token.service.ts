@@ -6,7 +6,9 @@ const KEY = 'token';
 })
 export class TokenService {
   salvarToken(token: string) {
-    return localStorage.setItem(KEY, token);
+    console.log('TokenService - Salvando token:', token);
+    localStorage.setItem(KEY, token);
+    console.log('TokenService - Token salvo, verificando:', localStorage.getItem(KEY));
   }
 
   excluirToken() {

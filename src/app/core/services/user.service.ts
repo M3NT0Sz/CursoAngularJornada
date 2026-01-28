@@ -17,11 +17,13 @@ export class UserService {
 
   decodificarJWT() {
     const token = this.tokenService.retornarToken();
+    console.log('UserService - Token para decodificar:', token);
     if (!token) {
       return;
     }
     try {
       const user = jwtDecode(token) as PessoaUsuaria;
+      console.log('UserService - Usuário decodificado:', user);
       this.userSubject.next(user);
     } catch (error) {
       console.error('Erro ao decodificar token:', error);
@@ -34,6 +36,7 @@ export class UserService {
   }
 
   salvarToken(token: string) {
+    console.log('UserService - Recebendo token para salvar:', token);
     this.tokenService.salvarToken(token);
     this.decodificarJWT();
   }
