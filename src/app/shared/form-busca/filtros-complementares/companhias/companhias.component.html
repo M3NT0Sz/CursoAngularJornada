@@ -4,7 +4,7 @@
     <p *ngFor="let opcao of companhias">
       <mat-checkbox
         color="primary"
-        [value]="opcao.id"
+        [value]="opcao.id.toString()"
         (change)="alternarCompanhia(opcao, $event.checked)"
         [checked]="companhiaSelecionada(opcao)"
       >

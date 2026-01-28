@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Companhia } from 'jornada-milhas-api/src/companhias/entities/companhia.entity';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Companhia } from '../types/type';
 
 @Injectable({
   providedIn: 'root',

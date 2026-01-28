@@ -24,6 +24,9 @@
       "dom"
     ]
   },
+  "exclude": [
+    "jornada-milhas-api"
+  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

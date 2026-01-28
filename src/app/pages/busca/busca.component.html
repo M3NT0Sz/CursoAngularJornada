@@ -16,7 +16,8 @@
           *ngFor="let passagem of passagens"
           [passagem]="passagem"
         ></app-passagem>
-        <p *ngIf="passagens.length === 0">Buscando passagens...</p>
+        <p *ngIf="carregando && passagens.length === 0">Buscando passagens...</p>
+        <p *ngIf="!carregando && passagens.length === 0">Nenhuma passagem encontrada. Tente ajustar os filtros.</p>
       </section>
     </section>
   </app-container>
