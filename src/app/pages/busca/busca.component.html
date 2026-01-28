@@ -4,7 +4,7 @@
     alt="Banner de busca"
   ></app-banner>
   <app-container>
-    <app-form-busca></app-form-busca>
+    <app-form-busca (realizarBusca)="busca($event)"></app-form-busca>
     <section class="conteudo">
       <app-passagem
         *ngFor="let passagem of passagens"

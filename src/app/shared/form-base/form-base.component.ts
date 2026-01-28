@@ -16,10 +16,6 @@ import { FormValidations } from '../form-validations';
 })
 export class FormBaseComponent implements OnInit {
   cadastroForm!: FormGroup;
-  estadoControl = new FormControl<UnidadeFederativa | null>(
-    null,
-    Validators.required,
-  );
   @Input() perfilComponent: boolean = false;
   @Input() titulo: string = 'Crie sua conta';
   @Input() textoBotao: string = 'Cadastrar';
@@ -41,7 +37,7 @@ export class FormBaseComponent implements OnInit {
       senha: [null, [Validators.required, Validators.minLength(3)]],
       genero: ['outro'],
       telefone: [null, Validators.required],
-      estado: this.estadoControl,
+      estado: [null, Validators.required],
       confirmarEmail: [
         null,
         [

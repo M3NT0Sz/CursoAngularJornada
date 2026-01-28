@@ -88,12 +88,9 @@
             <app-dropdown-uf
               label="Estado"
               placeholder="Estado"
-              [control]="estadoControl"
+              formControlName="estado"
             >
             </app-dropdown-uf>
-            <mat-error *ngIf="estadoControl.errors && estadoControl.touched"
-              >Estado é obrigatório</mat-error
-            >
           </div>
         </div>
       </mat-card-content>

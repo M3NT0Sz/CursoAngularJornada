@@ -1,9 +1,11 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, forwardRef, Injector, Input, OnInit } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
   NG_VALUE_ACCESSOR,
+  NgControl,
 } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { Observable, map, startWith } from 'rxjs';
 import { UnidadeFederativaService } from 'src/app/core/services/unidade-federativa.service';
 import { UnidadeFederativa } from 'src/app/core/types/type';
@@ -24,41 +26,73 @@ export class DropdownUfComponent implements OnInit, ControlValueAccessor {
   @Input() label: string = '';
   @Input() iconePrefixo: string = '';
   @Input() placeholder: string = '';
-  @Input() control!: FormControl;
 
+  control: FormControl = new FormControl();
   unidadesFederativas: UnidadeFederativa[] = [];
-
+  
   filteredOptions$!: Observable<UnidadeFederativa[]>;
+  
+  disabled = false;
+  touched = false;
+  value: any = null;
+  ngControl: NgControl | null = null;
+  errorStateMatcher: ErrorStateMatcher;
 
   onChange = (value: any) => {};
   onTouched = () => {};
 
-  constructor(private unidadeFederativaService: UnidadeFederativaService) {}
+  constructor(
+    private unidadeFederativaService: UnidadeFederativaService,
+    private injector: Injector
+  ) {
+    this.errorStateMatcher = {
+      isErrorState: () => {
+        return this.ngControl ? !!(this.ngControl.invalid && this.ngControl.touched) : false;
+      }
+    };
+  }
 
   ngOnInit(): void {
+    this.ngControl = this.injector.get(NgControl, null);
+    console.log('NgControl injetado:', this.ngControl);
+    
     this.unidadeFederativaService.listar().subscribe((dados) => {
       this.unidadesFederativas = dados;
       console.log(this.unidadesFederativas);
-      if (this.control) {
-        this.filteredOptions$ = this.control.valueChanges.pipe(
-          startWith(''),
-          map((value) => this.filtrarUfs(value || '')),
-        );
-      }
+      this.filteredOptions$ = this.control.valueChanges.pipe(
+        startWith(''),
+        map((value) => this.filtrarUfs(value || '')),
+      );
     });
 
-    if (this.control) {
-      this.control.valueChanges.subscribe((value) => {
-        this.onChange(value);
-        this.onTouched();
-      });
+    this.control.valueChanges.subscribe((value) => {
+      this.value = value;
+      this.onChange(value);
+    });
+  }
+
+  get invalid(): boolean {
+    return this.ngControl ? this.ngControl.invalid! && this.ngControl.touched! : false;
+  }
+
+  mostrarErro(): boolean {
+    if (this.ngControl) {
+      console.log(`${this.label} - Invalid:`, this.ngControl.invalid, 'Touched:', this.ngControl.touched);
+      return !!(this.ngControl.invalid && this.ngControl.touched);
+    }
+    return false;
+  }
+
+  markAsTouched(): void {
+    if (!this.touched) {
+      this.touched = true;
+      this.onTouched();
     }
   }
 
   writeValue(value: any): void {
-    if (this.control) {
-      this.control.setValue(value, { emitEvent: false });
-    }
+    this.value = value;
+    this.control.setValue(value, { emitEvent: false });
   }
 
   registerOnChange(fn: any): void {
@@ -70,9 +104,8 @@ export class DropdownUfComponent implements OnInit, ControlValueAccessor {
   }
 
   setDisabledState?(isDisabled: boolean): void {
-    if (this.control) {
-      isDisabled ? this.control.disable() : this.control.enable();
-    }
+    this.disabled = isDisabled;
+    isDisabled ? this.control.disable() : this.control.enable();
   }
 
   private filtrarUfs(value: string | UnidadeFederativa): UnidadeFederativa[] {

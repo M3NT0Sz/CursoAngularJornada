@@ -8,6 +8,8 @@
     [name]="label"
     ngDefaultControl
     [matAutocomplete]="auto"
+    [errorStateMatcher]="errorStateMatcher"
+    (blur)="markAsTouched()"
   />
   <mat-icon matSuffix>search</mat-icon>
   <mat-autocomplete [displayWith]="displayFn" #auto="matAutocomplete">
@@ -18,4 +20,7 @@
       {{ option.nome }} - {{ option.sigla }}
     </mat-option>
   </mat-autocomplete>
+  <mat-error *ngIf="mostrarErro()">
+    {{ label }} é obrigatório
+  </mat-error>
 </mat-form-field>

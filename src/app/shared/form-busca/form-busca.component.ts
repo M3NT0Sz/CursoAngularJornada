@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { ModalComponent } from '../modal/modal.component';
 import { FormBuscaService } from 'src/app/core/services/form-busca.service';
+import { DadosBusca } from 'src/app/core/types/type';
 
 @Component({
   selector: 'app-form-busca',
@@ -9,11 +8,18 @@ import { FormBuscaService } from 'src/app/core/services/form-busca.service';
   styleUrls: ['./form-busca.component.scss'],
 })
 export class FormBuscaComponent {
-  @Output() realizarBusca = new EventEmitter();
+  @Output() realizarBusca = new EventEmitter<DadosBusca>();
   constructor(public formBuscaService: FormBuscaService) {}
 
   buscar() {
-    const formBuscavalue = this.formBuscaService.formBusca.value;
-    this.realizarBusca.emit(formBuscavalue);
+    if (this.formBuscaService.formEstaValido) {
+      const formBuscaValue = this.formBuscaService.obterDadosDeBusca();
+      this.realizarBusca.emit(formBuscaValue);
+    } else {
+      this.formBuscaService.formBusca.markAllAsTouched();
+      alert(
+        'Por favor, preencha todos os campos obrigatórios antes de buscar.',
+      );
+    }
   }
 }
