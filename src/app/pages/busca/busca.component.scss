@@ -9,6 +9,13 @@
   }
   .passagens {
     flex-grow: 1;
+    .cardsPrecos{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
     .destaques {
       display: flex;
       justify-content: space-between;

@@ -85,3 +85,9 @@ export interface DadosBusca {
   pagina: number;
   porPagina: number;
 }
+
+export interface Destaques {
+  maisRapida: Passagem;
+  maisBarata: Passagem;
+  sugerida: Passagem;
+}

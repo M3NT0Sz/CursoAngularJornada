@@ -12,12 +12,36 @@
         ></app-filtros-complementares>
       </aside>
       <section class="passagens">
+        <section class="cardsPrecos">
+          <app-card variant="secondary">
+            <app-destaques
+              destacadaPor="Menor preço"
+              [passagem]="destaques.maisBarata"
+            />
+          </app-card>
+          <app-card variant="primary">
+            <app-destaques
+              destacadaPor="Recomendado"
+              [passagem]="destaques.sugerida"
+            />
+          </app-card>
+          <app-card>
+            <app-destaques
+              destacadaPor="Menor tempo"
+              [passagem]="destaques.maisRapida"
+            />
+          </app-card>
+        </section>
         <app-passagem
           *ngFor="let passagem of passagens"
           [passagem]="passagem"
         ></app-passagem>
-        <p *ngIf="carregando && passagens.length === 0">Buscando passagens...</p>
-        <p *ngIf="!carregando && passagens.length === 0">Nenhuma passagem encontrada. Tente ajustar os filtros.</p>
+        <p *ngIf="carregando && passagens.length === 0">
+          Buscando passagens...
+        </p>
+        <p *ngIf="!carregando && passagens.length === 0">
+          Nenhuma passagem encontrada. Tente ajustar os filtros.
+        </p>
       </section>
     </section>
   </app-container>
