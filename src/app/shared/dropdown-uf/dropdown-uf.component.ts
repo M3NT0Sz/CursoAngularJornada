@@ -39,20 +39,26 @@ export class DropdownUfComponent implements OnInit, ControlValueAccessor {
     this.unidadeFederativaService.listar().subscribe((dados) => {
       this.unidadesFederativas = dados;
       console.log(this.unidadesFederativas);
-      this.filteredOptions$ = this.control.valueChanges.pipe(
-        startWith(''),
-        map((value) => this.filtrarUfs(value || '')),
-      );
+      if (this.control) {
+        this.filteredOptions$ = this.control.valueChanges.pipe(
+          startWith(''),
+          map((value) => this.filtrarUfs(value || '')),
+        );
+      }
     });
 
-    this.control.valueChanges.subscribe((value) => {
-      this.onChange(value);
-      this.onTouched();
-    });
+    if (this.control) {
+      this.control.valueChanges.subscribe((value) => {
+        this.onChange(value);
+        this.onTouched();
+      });
+    }
   }
 
   writeValue(value: any): void {
-    this.control.setValue(value, { emitEvent: false });
+    if (this.control) {
+      this.control.setValue(value, { emitEvent: false });
+    }
   }
 
   registerOnChange(fn: any): void {
@@ -64,7 +70,9 @@ export class DropdownUfComponent implements OnInit, ControlValueAccessor {
   }
 
   setDisabledState?(isDisabled: boolean): void {
-    isDisabled ? this.control.disable() : this.control.enable();
+    if (this.control) {
+      isDisabled ? this.control.disable() : this.control.enable();
+    }
   }
 
   private filtrarUfs(value: string | UnidadeFederativa): UnidadeFederativa[] {

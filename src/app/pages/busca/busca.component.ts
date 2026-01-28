@@ -12,7 +12,7 @@ export class BuscaComponent implements OnInit {
   constructor(private passagensService: PassagensService) {}
   ngOnInit(): void {
     const buscaPadrao = {
-      data: new Date().toISOString,
+      data: new Date().toISOString(),
       pagina: 1,
       porPagina: 25,
       somenteIda: false,

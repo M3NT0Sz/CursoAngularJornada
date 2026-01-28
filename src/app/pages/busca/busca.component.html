@@ -6,7 +6,12 @@
   <app-container>
     <app-form-busca></app-form-busca>
     <section class="conteudo">
-      Filtros, Cards de Recomendados e Cards de Passagens
+      <app-passagem
+        *ngFor="let passagem of passagens"
+        [passagem]="passagem"
+      ></app-passagem>
+      <p *ngIf="passagens.length === 0">Buscando passagens...</p>
     </section>
   </app-container>
+  <app-passagem></app-passagem>
 </div>

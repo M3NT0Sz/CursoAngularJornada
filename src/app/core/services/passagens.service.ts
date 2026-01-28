@@ -12,7 +12,7 @@ export class PassagensService {
   constructor(private httpClient: HttpClient) {}
   getPassagens(search: any): Observable<Resultado> {
     const params = search;
-    return this.httpClient.get<Resultado>(this.apiUrl + '/passagens/search', {
+    return this.httpClient.get<Resultado>(this.apiUrl + '/passagem/search', {
       params,
     });
   }
