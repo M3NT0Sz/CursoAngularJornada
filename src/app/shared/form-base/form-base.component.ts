@@ -61,7 +61,7 @@ export class FormBaseComponent implements OnInit {
     this.formularioService.setCadastro(this.cadastroForm);
   }
 
-  eventoClique() {
+  executarAcao() {
     this.acaoClique.emit();
   }
 }

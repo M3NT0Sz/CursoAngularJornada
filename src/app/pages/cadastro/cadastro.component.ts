@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { FormularioService } from 'src/app/core/services/formulario.service';
 import { PessoaUsuaria } from 'src/app/core/types/type';
@@ -14,6 +15,7 @@ export class CadastroComponent {
   constructor(
     private formularioService: FormularioService,
     private cadastroService: CadastroService,
+    private router: Router,
   ) {}
 
   cadastrar() {
@@ -27,6 +29,7 @@ export class CadastroComponent {
             'Clicou no cadastrar do componente de cadastro',
             formCadastro,
           );
+          this.router.navigate(['/login']);
         },
         error: (err) => {
           console.error('Erro ao cadastrar usuário:', err);
